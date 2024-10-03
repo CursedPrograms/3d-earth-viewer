@@ -9,7 +9,7 @@
 </div>
 <br>
 
-# planet-viewer
+# 3d-earth
 
 <br>
 <div align="center">
