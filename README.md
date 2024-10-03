@@ -11,6 +11,8 @@
 
 # planet-viewer
 
+
+<iframe src="https://cursedprograms.github.io/3d-earth/" width="600" height="400" style="border:none;"></iframe>
 <br>
 <div align="center">
 <a href="https://cursed-entertainment.itch.io/" target="_blank">
