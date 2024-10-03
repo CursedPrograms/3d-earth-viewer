@@ -13,7 +13,7 @@
 
 <br>
 <div align="center">
-    <iframe src="https://cursedprograms.github.io/3d-earth/" width="600" height="400" style="border:none;"></iframe>
+    
 <a href="https://cursed-entertainment.itch.io/" target="_blank">
     <img src="https://github.com/CursedPrograms/cursedentertainment/raw/main/images/logos/logo-wide-grey.png"
         alt="CursedEntertainment Logo" style="width:250px;">
