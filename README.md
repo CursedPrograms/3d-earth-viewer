@@ -9,7 +9,7 @@
 </div>
 <br>
 
-# website-template
+# planet-viewer
 
 <br>
 <div align="center">
