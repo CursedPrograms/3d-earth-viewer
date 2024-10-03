@@ -1,45 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-
-<body>
-
-    <header>
-        <h1>Your Website</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section>
-            <h2>Welcome to Our Website!</h2>
-            <p>This is the main content of your website. You can add more sections, text, images, and other
-                elements.</p>
-        </section>
-
-        <!-- Add more sections as needed -->
-
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Your Website. All rights reserved.</p>
-    </footer>
-
-    <!-- Add your scripts or other body elements here -->
-    <script src="script/script.js"></script>
-
-</body>
-
-</html>
+<html><head><base href="https://cursedprograms.github.io/planet-viewer/">
+    <meta charset="utf-8">
+    <title>3D Earth Explorer</title>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #000;
+      }
+      #canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      #info {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: white;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        background-color: rgba(0,0,0,0.5);
+        padding: 10px;
+        border-radius: 5px;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    </head>
+    <body>
+    <canvas id="canvas"></canvas>
+    <div id="info">
+      Drag to rotate the Earth<br>
+      Scroll to zoom in/out
+    </div>
+    <script>
+      let scene, camera, renderer, earth;
+      const textureLoader = new THREE.TextureLoader();
+    
+      function init() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        renderer = new THREE.WebGLRenderer({canvas: document.getElementById('canvas'), antialias: true});
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    
+        const geometry = new THREE.SphereGeometry(5, 64, 64);
+        const texture = textureLoader.load('https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Blue_Marble_2002.png/2880px-Blue_Marble_2002.png');
+        const material = new THREE.MeshPhongMaterial({
+          map: texture,
+          bumpMap: textureLoader.load('https://upload.wikimedia.org/wikipedia/commons/7/74/Earthbump1k.jpg'),
+          bumpScale: 0.05,
+          specularMap: textureLoader.load('https://upload.wikimedia.org/wikipedia/commons/e/e4/Earthspec1k.jpg'),
+          specular: new THREE.Color('grey')
+        });
+    
+        earth = new THREE.Mesh(geometry, material);
+        scene.add(earth);
+    
+        const ambientLight = new THREE.AmbientLight(0x333333);
+        scene.add(ambientLight);
+    
+        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight.position.set(10, 10, 10);
+        scene.add(pointLight);
+    
+        camera.position.z = 15;
+    
+        addStars();
+        setupMouseControls();
+      }
+    
+      function addStars() {
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+    
+        for (let i = 0; i < 10000; i++) {
+          vertices.push(
+            Math.random() * 600 - 300,
+            Math.random() * 600 - 300,
+            Math.random() * 600 - 300
+          );
+        }
+    
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    
+        const material = new THREE.PointsMaterial({color: 0xffffff, size: 0.1});
+        const stars = new THREE.Points(geometry, material);
+        scene.add(stars);
+      }
+    
+      let isDragging = false;
+      let previousMousePosition = {
+        x: 0,
+        y: 0
+      };
+    
+      function setupMouseControls() {
+        document.addEventListener('mousedown', onMouseDown, false);
+        document.addEventListener('mousemove', onMouseMove, false);
+        document.addEventListener('mouseup', onMouseUp, false);
+        document.addEventListener('wheel', onMouseWheel, false);
+      }
+    
+      function onMouseDown(event) {
+        isDragging = true;
+      }
+    
+      function onMouseMove(event) {
+        if (isDragging) {
+          const deltaMove = {
+            x: event.clientX - previousMousePosition.x,
+            y: event.clientY - previousMousePosition.y
+          };
+    
+          earth.rotation.y += deltaMove.x * 0.005;
+          earth.rotation.x += deltaMove.y * 0.005;
+        }
+    
+        previousMousePosition = {
+          x: event.clientX,
+          y: event.clientY
+        };
+      }
+    
+      function onMouseUp(event) {
+        isDragging = false;
+      }
+    
+      function onMouseWheel(event) {
+        camera.position.z += event.deltaY * 0.05;
+        camera.position.z = Math.max(8, Math.min(camera.position.z, 30));
+      }
+    
+      function animate() {
+        requestAnimationFrame(animate);
+        earth.rotation.y += 0.0005;
+        renderer.render(scene, camera);
+      }
+    
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+    
+      window.addEventListener('resize', onWindowResize, false);
+    
+      init();
+      animate();
+    </script>
+    </body>
+    </html>
