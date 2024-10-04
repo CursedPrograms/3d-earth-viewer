@@ -6,7 +6,11 @@
     "Description": "",
     "Homepage": "",
     "Navigation": {
-      "MenuItem": ["", "", ""]
+      "MenuItem": [
+        "",
+        "",
+        ""
+      ]
     }
   }
 }
