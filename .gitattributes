@@ -12,3 +12,8 @@
 *.svg linguist-generated=false
 *.svg linguist-documentation=false
 *.svg linguist-detectable=true
+
+*.toml linguist-vendored=false
+*.toml linguist-generated=false
+*.toml linguist-documentation=false
+*.toml linguist-detectable=true
