@@ -1,53 +1,27 @@
-/* Reset some default browser styles */
-body,
-h1,
-h2,
-p,
-ul {
+body, html {
     margin: 0;
     padding: 0;
-}
-
-/* Set a base font size and family */
-body {
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-}
-
-/* Style the header */
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 1em;
-    text-align: center;
-}
-
-header h1 {
-    margin: 0;
-}
-
-nav ul {
-    list-style: none;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 15px;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-}
-
-/* Style the main content area */
-main {
-    padding: 20px;
-}
-
-section {
-    margin-bottom: 20px;
-}
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000;
+  }
+  #canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  #info {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background-color: rgba(0,0,0,0.5);
+    padding: 10px;
+    border-radius: 5px;
+  }
 
 /* Style the footer */
 footer {
