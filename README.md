@@ -8,8 +8,8 @@
 </div>
   <br>
 
-<a href="https://github.com/CursedPrograms/website-template/actions/workflows/proof-html.yml">
-    <img class="workflow-badge workflow-success" src="https://github.com/CursedPrograms/website-template/actions/workflows/proof-html.yml/badge.svg" alt="Proof HTML Workflow">
+<a href="https://github.com/CursedPrograms/3d-earth-viewer/actions/workflows/proof-html.yml">
+    <img class="workflow-badge workflow-success" src="https://github.com/CursedPrograms/3d-earth-viewer/actions/workflows/proof-html.yml/badge.svg" alt="Proof HTML Workflow">
 </a>
 <br>
 <div align="center">
@@ -19,7 +19,7 @@
 </div>
 <br>
 
-# 3d-earth
+# 3d-earth-viewer
 
 <br>
 <div align="center">
